@@ -6,6 +6,26 @@ const App = () => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  function shuffle(array) {
+    var currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
   useEffect(() => {
     async function getPhotos() {
       let pictures = [];
@@ -16,10 +36,11 @@ const App = () => {
           height: 3,
         });
       }
-      setPhotos(pictures);
+
+      setPhotos(shuffle(pictures));
       setTimeout(() => {
         setLoading(false);
-      }, 3000);
+      }, 1000);
     }
     getPhotos();
   }, []);
