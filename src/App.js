@@ -18,8 +18,8 @@ const App = () => {
           height: 3,
         });
       }
+      setPhotos(pictures);
       setTimeout(() => {
-        setPhotos(pictures);
         setLoading(false);
       }, 3000);
     }
