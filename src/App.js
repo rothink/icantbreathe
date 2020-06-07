@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Gallery from "react-photo-gallery";
 import ReactLoading from "react-loading";
-import ClipLoader from "react-spinners/ClipLoader";
-// import "./App.css";
 
 const App = () => {
   const [photos, setPhotos] = useState([]);
