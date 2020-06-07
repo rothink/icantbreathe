@@ -1,33 +1,43 @@
 import React, { useState, useEffect } from "react";
 import Gallery from "react-photo-gallery";
-import axios from "axios";
-import "./App.css";
+import ReactLoading from "react-loading";
+import ClipLoader from "react-spinners/ClipLoader";
+// import "./App.css";
 
 const App = () => {
   const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getPhotos() {
-      const response = await axios.get(
-        "https://unsplash.com/napi/search/photos?query=i%20cant%20breathe&xp=&per_page=20&page=2&color=black_and_white"
-      );
-      const pictures = await response.data.results.map((photo) => {
-        return {
-          id: photo.id,
-          src: photo.urls.small,
+      let pictures = [];
+      for (let i = 1; i <= 23; i++) {
+        pictures.push({
+          src: require(`./assets/img${i}.jpg`),
           width: 4,
           height: 3,
-        };
-      });
-      setPhotos(pictures);
+        });
+      }
+      setTimeout(() => {
+        setPhotos(pictures);
+        setLoading(false);
+      }, 3000);
     }
     getPhotos();
   }, []);
 
   return (
-    <div className="App-header">
-      <Gallery photos={photos} />
-    </div>
+    <>
+      {loading ? (
+        <div className="App-header">
+          <ReactLoading color="#111" />
+        </div>
+      ) : (
+        <div>
+          <Gallery photos={photos} />
+        </div>
+      )}
+    </>
   );
 };
 
