@@ -30,7 +30,7 @@ const App = () => {
     <>
       {loading ? (
         <div className="App-header">
-          <ReactLoading color="#111" />
+          <ReactLoading color="#fff" />
         </div>
       ) : (
         <div>
